@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Loading screen animation */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        #loadingScreen.hidden {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        /* Page fade-in effect */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search bar focus effect */
+        .search-bar:focus {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
+            outline: none;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        /* Table row hover effect */
+        .inventory-table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        .inventory-table tbody tr:hover {
+            background-color: #e2e8f0;
+            transform: scale(1.02);
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+        }
+
+        /* Dark mode transition */
+        .dark-mode {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #1f2937;
+            color: white;
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        #sidebar.show {
+            left: 0;
+        }
+
+        /* Sidebar toggle button */
+        #sidebarToggle {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            background-color: #1f2937;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: background-color 0.3s;
+        }
+
+        #sidebarToggle:hover {
+            background-color: #374151;
+        }
+
+        /* Notification message */
+        .notification {
+            position: fixed;
+            top: -50px;
+            right: 20px;
+            background-color: #38a169;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            transition: top 0.5s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            top: 20px;
+        }
+
+        /* Floating action button */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+        }
+
+        .floating-btn:hover {
+            background-color: #3182ce;
+            transform: scale(1.1);
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Page wrapper for flexbox layout */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure it takes full height of the viewport */
+        }
+
+        /* Dark mode toggle icon rotation */
+        #darkModeToggle .toggle-icon {
+            transition: transform 0.5s ease;
+        }
+
+        /* Change icon rotation for dark mode */
+        .dark-mode #darkModeToggle .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Text color transition */
+        body {
+            transition: color 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 fade-in">
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <h2 class="text-3xl font-bold animate-pulse">Loading...</h2>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="shadow-lg">
+        <ul class="space-y-4 p-4">
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Dashboard</a></li>
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Products</a></li>
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Categories</a></li>
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Reports</a></li>
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button id="sidebarToggle">☰ Menu</button>
+
+    <!-- Dark mode toggle -->
+    <div class="p-4 text-right">
+        <button id="darkModeToggle" class="bg-gray-800 text-white px-4 py-2 rounded-lg transform transition-transform duration-200">
+            <span class="toggle-icon">🌙</span> Toggle Dark Mode
+        </button>
+    </div>
+
+    <!-- Notification message -->
+    <div id="notification" class="notification">
+        Welcome to the Inventory Management System!
+    </div>
+
+    <!-- Main Page Wrapper -->
+    <div class="page-wrapper">
+        <!-- Inventory Management Content -->
+        <div class="container mx-auto p-6">
+            <h1 class="text-3xl font-bold text-center mb-6 animate-bounce">Inventory</h1>
+
+            <!-- Search Bar -->
+            <div class="flex justify-center mb-6">
+                <input type="text" id="searchBar" placeholder="Search inventory..." class="search-bar w-full max-w-lg px-4 py-2 rounded-lg border-2 focus:border-blue-500 transition-all duration-300">
+            </div>
+
+            <!-- Inventory Table -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg shadow-md inventory-table">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Product Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Category</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Stock</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Price</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody">
+                        <!-- Example rows (should be dynamically generated in a real application) -->
+                        <tr class="border-b border-gray-200">
+                            <td class="px-6 py-4 whitespace-nowrap">Product 1</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Category 1</td>
+                            <td class="px-6 py-4 whitespace-nowrap">50</td>
+                            <td class="px-6 py-4 whitespace-nowrap">$20.00</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2 hover:bg-blue-600">Edit</button>
+                                <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Delete</button>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="px-6 py-4 whitespace-nowrap">Product 2</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Category 2</td>
+                            <td class="px-6 py-4 whitespace-nowrap">30</td>
+                            <td class="px-6 py-4 whitespace-nowrap">$35.00</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2 hover:bg-blue-600">Edit</button>
+                                <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Delete</button>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="px-6 py-4 whitespace-nowrap">Product 3</td>
+                            <td class="px-6 py-4 whitespace-nowrap">Category 3</td>
+                            <td class="px-6 py-4 whitespace-nowrap">75</td>
+                            <td class="px-6 py-4 whitespace-nowrap">$15.00</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg mr-2 hover:bg-blue-600">Edit</button>
+                                <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating action button -->
+    <button class="floating-btn">+</button>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Inventory Management System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle sidebar visibility
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('show');
+        });
+
+        // Toggle dark mode
+        document.getElementById('darkModeToggle').addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            // Change text color in dark mode
+            document.body.style.color = document.body.classList.contains('dark-mode') ? '#f0f0f0' : '#2d2d2d';
+        });
+
+        // Show notification on page load
+        window.onload = function () {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000); // Hide after 3 seconds
+
+            // Hide loading screen after 1 second
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1000);
+        };
+    </script>
+
+</body>
+
+</html>

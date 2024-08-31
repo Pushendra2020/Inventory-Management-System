@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Loading screen animation */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        #loadingScreen.hidden {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        /* Page fade-in effect */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search bar focus effect */
+        .search-bar:focus {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.7);
+            outline: none;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        /* Table row hover effect */
+        .inventory-table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        .inventory-table tbody tr:hover {
+            background-color: #e2e8f0;
+            transform: scale(1.02);
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+        }
+
+        /* Dark mode transition */
+        .dark-mode {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #1f2937;
+            color: white;
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            z-index: 1000;
+        }
+
+        #sidebar.show {
+            left: 0;
+        }
+
+        /* Sidebar toggle button */
+        #sidebarToggle {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            background-color: #1f2937;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: background-color 0.3s;
+        }
+
+        #sidebarToggle:hover {
+            background-color: #374151;
+        }
+
+         /* Footer styling */
+         footer {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+            margin-top: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Page wrapper for flexbox layout */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure it takes full height of the viewport */
+        }
+
+        /* Dark mode toggle icon rotation */
+        #darkModeToggle .toggle-icon {
+            transition: transform 0.5s ease;
+        }
+
+        /* Change icon rotation for dark mode */
+        .dark-mode #darkModeToggle .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Text color transition */
+        body {
+            transition: color 0.3s ease;
+        }
+        </style>
+
+</head>
+<body class="bg-gray-100 fade-in">
+    
+<!-- Loading Screen -->
+<div id="loadingScreen">
+    <h2 class="text-3xl font-bold animate-pulse"></h2>
+</div>
+
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="shadow-lg">
+        <ul class="space-y-4 p-4">
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Dashboard</a></li>
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Products</a></li>
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Categories</a></li>
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Reports</a></li>
+            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Settings</a></li>
+        </ul>
+    </div>
+
+
+<!-- Sidebar Toggle Button -->
+<button id="sidebarToggle">☰ Menu</button>
+
+
+    <!-- Dark mode toggle -->
+    <div class="p-4 text-right">
+        <button id="darkModeToggle" class="bg-gray-800 text-white px-4 py-2 rounded-lg transform transition-transform duration-200">
+            <span class="toggle-icon">🌙</span> Toggle Dark Mode
+        </button>
+    </div>
+
+
+    <div class="p-6">
+        <h2 class="text-2xl font-semibold mb-4">Manage Products</h2>
+    
+        <!-- Products Table -->
+        <div class="overflow-x-auto shadow-md rounded-lg">
+            <table class="min-w-full bg-white">
+                <thead class="bg-gray-800 text-white">
+                    <tr>
+                        <th class="py-3 px-6 text-left">Product Name</th>
+                        <th class="py-3 px-6 text-left">Category</th>
+                        <th class="py-3 px-6 text-left">Price</th>
+                        <th class="py-3 px-6 text-left">Stock Quantity</th>
+                        <th class="py-3 px-6 text-left">Barcode</th>
+                        <th class="py-3 px-6 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example Row -->
+                    <tr class="border-b">
+                        <td class="py-3 px-6">Product A</td>
+                        <td class="py-3 px-6">Category 1</td>
+                        <td class="py-3 px-6">$10.00</td>
+                        <td class="py-3 px-6">100</td>
+                        <td class="py-3 px-6">1234567890123</td>
+                        <td class="py-3 px-6 flex space-x-2">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">Update</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg">Delete</button>
+                        </td>
+                    </tr>
+                    <!-- Additional Rows -->
+                </tbody>
+            </table>
+        </div>
+    
+        <!-- Insert Product Form -->
+        <div class="mt-6">
+            <h3 class="text-xl font-semibold mb-4">Insert New Product</h3>
+            <form class="space-y-4">
+                <div class="flex space-x-4">
+                    <div class="w-1/5">
+                        <label class="block text-gray-700">Product Name</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="w-1/5">
+                        <label class="block text-gray-700">Category</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="w-1/5">
+                        <label class="block text-gray-700">Price</label>
+                        <input type="number" step="0.01" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="w-1/5">
+                        <label class="block text-gray-700">Stock Quantity</label>
+                        <input type="number" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="w-1/5">
+                        <label class="block text-gray-700">Barcode Number</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+                <button class="bg-green-500 text-white px-4 py-2 rounded-lg">Insert</button>
+            </form>
+        </div>
+    </div>
+    
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Inventory Management System. All rights reserved.</p>
+</footer>
+
+<script>
+    // Toggle sidebar visibility
+    document.getElementById('sidebarToggle').addEventListener('click', function () {
+        document.getElementById('sidebar').classList.toggle('show');
+    });
+
+    // Toggle dark mode
+    document.getElementById('darkModeToggle').addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+        // Change text color in dark mode
+        document.body.style.color = document.body.classList.contains('dark-mode') ? '#f0f0f0' : '#2d2d2d';
+    });
+
+    // Show notification on page load
+    window.onload = function () {
+        const notification = document.getElementById('notification');
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 3000); // Hide after 3 seconds
+
+        // Hide loading screen after 1 second
+        setTimeout(() => {
+            document.getElementById('loadingScreen').classList.add('hidden');
+        }, 1000);
+    };
+</script>
+
+
+</body>
+</html>

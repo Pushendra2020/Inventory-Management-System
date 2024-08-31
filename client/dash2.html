@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Sidebar -->
+    <div class="flex">
+        <aside class="w-64 bg-gray-800 h-screen">
+            <div class="p-4">
+                <h1 class="text-white text-2xl font-bold">Inventory Management</h1>
+            </div>
+            <nav class="mt-10">
+                <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg">
+                    <span class="ml-4">Dashboard</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Inventory</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Purchase Details</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Sales</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Manage Store</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 relative">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold">Dashboard</h2>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-500">abcd bcd</span>
+                    <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-lg" id="profileBtn">Profile</a>
+                    <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-lg" id="signupBtn">Sign Up</a>
+                    <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-lg" id="loginBtn">Login</a>
+                </div>
+            </div>
+
+            <!-- Dashboard Cards -->
+            <div class="grid grid-cols-4 gap-6 mb-6">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-gray-500 text-xs uppercase">Sales</h3>
+                    <p class="text-xl font-semibold">$0</p>
+                    <span class="text-green-500 text-sm">+67.81%</span>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-gray-500 text-xs uppercase">Purchase</h3>
+                    <p class="text-xl font-semibold">$0</p>
+                    <span class="text-red-500 text-sm">-67.81%</span>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-gray-500 text-xs uppercase">Total Products</h3>
+                    <p class="text-xl font-semibold">0</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-gray-500 text-xs uppercase">Total Stores</h3>
+                    <p class="text-xl font-semibold">0</p>
+                    <span class="text-red-500 text-sm">-67.81%</span>
+                </div>
+            </div>
+
+            <!-- Recent Inventory Movements Table -->
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-semibold mb-4">Recent Inventory Movements</h3>
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Date</th>
+                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Product</th>
+                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Action</th>
+                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Quantity</th>
+                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Store</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 text-sm text-gray-700">2024-08-28</td>
+                            <td class="py-2 text-sm text-gray-700">Product A</td>
+                            <td class="py-2 text-sm text-gray-700">Added</td>
+                            <td class="py-2 text-sm text-gray-700">150</td>
+                            <td class="py-2 text-sm text-gray-700">Store 1</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 text-sm text-gray-700">2024-08-27</td>
+                            <td class="py-2 text-sm text-gray-700">Product B</td>
+                            <td class="py-2 text-sm text-gray-700">Removed</td>
+                            <td class="py-2 text-sm text-gray-700">100</td>
+                            <td class="py-2 text-sm text-gray-700">Store 2</td>
+                        </tr>
+                        <!-- Add more rows as necessary -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Low Stock Alerts -->
+            <div class="bg-white p-6 rounded-lg shadow mt-6">
+                <h3 class="text-xl font-semibold mb-4">Low Stock Alerts</h3>
+                <ul class="list-disc pl-5 text-sm text-gray-600">
+                    <li>Product C - Only 5 units left</li>
+                    <li>Product D - Only 3 units left</li>
+                    <!-- Add more alerts as necessary -->
+                </ul>
+            </div>
+
+            <!-- Profile Page -->
+            <div id="profilePage" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
+                <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
+                    <h2 class="text-2xl font-bold mb-4 text-center">Profile</h2>
+                    <div class="flex flex-col items-center mb-6">
+                        <img src="385.webp" alt="Profile Picture" class="rounded-full mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold">abcd bcd</h3>
+                        <p class="text-gray-600">abcd@example.com</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Username:</span>
+                            <span class="font-semibold">abcd bcd</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Email:</span>
+                            <span class="font-semibold">abcd@example.com</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Joined:</span>
+                            <span class="font-semibold">January 2024</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-6">
+                        <button class="bg-red-500 text-white px-4 py-2 rounded-lg" id="closeProfile">Close</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Signup and Login Modals -->
+    <div id="signupModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 class="text-xl font-bold mb-4">Sign Up</h2>
+            <form id="signupForm">
+                <div class="mb-4">
+                    <label for="signupUsername" class="block text-gray-700">Username</label>
+                    <input type="text" id="signupUsername" class="mt-1 p-2 w-full border rounded-lg" required>
+                </div>
+                <div class="mb-4">
+                    <label for="signupEmail" class="block text-gray-700">Email</label>
+                    <input type="email" id="signupEmail" class="mt-1 p-2 w-full border rounded-lg" required>
+                </div>
+                <div class="mb-4">
+                    <label for="signupPassword" class="block text-gray-700">Password</label>
+                    <input type="password" id="signupPassword" class="mt-1 p-2 w-full border rounded-lg" required>
+                </div>
+                <div class="flex justify-end">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="loginModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 class="text-xl font-bold mb-4">Login</h2>
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label for="loginUsername" class="block text-gray-700">Username</label>
+                    <input type="text" id="loginUsername" class="mt-1 p-2 w-full border rounded-lg" required>
+                </div>
+                <div class="mb-4">
+                    <label for="loginPassword" class="block text-gray-700">Password</label>
+                    <input type="password" id="loginPassword" class="mt-1 p-2 w-full border rounded-lg" required>
+                </div>
+                <div class="flex justify-end">
+                    <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded-lg">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Profile modal handling
+        const profileBtn = document.getElementById('profileBtn');
+        const profilePage = document.getElementById('profilePage');
+        const closeProfile = document.getElementById('closeProfile');
+
+        profileBtn.addEventListener('click', () => {
+            profilePage.classList.remove('hidden');
+        });
+
+        closeProfile.addEventListener('click', () => {
+            profilePage.classList.add('hidden');
+        });
+
+        // Signup modal handling
+        const signupBtn = document.getElementById('signupBtn');
+        const signupModal = document.getElementById('signupModal');
+
+        signupBtn.addEventListener('click', () => {
+            signupModal.classList.remove('hidden');
+        });
+
+        // Login modal handling
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+
+        loginBtn.addEventListener('click', () => {
+            loginModal.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
