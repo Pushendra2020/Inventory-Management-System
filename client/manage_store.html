@@ -142,20 +142,31 @@
 </div>
 
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="shadow-lg">
-        <ul class="space-y-4 p-4">
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Dashboard</a></li>
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Products</a></li>
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Categories</a></li>
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Reports</a></li>
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Settings</a></li>
-        </ul>
-    </div>
+     <!-- Sidebar -->
+     <div class="flex">
+        <aside class="w-64 bg-gray-800 h-screen">
+            <div class="p-4">
+                <h1 class="text-white text-2xl font-bold">Inventory Management</h1>
+            </div>
+            <nav class="mt-10">
+                <a href="/client/dash2.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg">
+                    <span class="ml-4">Dashboard</span>
+                </a>
+                <a href="/client/inventory.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Inventory</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Purchase Details</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Sales</span>
+                </a>
+                <a href="/client/manage_store.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Manage Store</span>
+                </a>
+            </nav>
+        </aside>
 
-
-<!-- Sidebar Toggle Button -->
-<button id="sidebarToggle">☰ Menu</button>
 
 
     <!-- Dark mode toggle -->
@@ -169,39 +180,41 @@
     <div class="p-6">
         <h2 class="text-2xl font-semibold mb-4">Manage Products</h2>
     
-        <!-- Products Table -->
-        <div class="overflow-x-auto shadow-md rounded-lg">
-            <table class="min-w-full bg-white">
-                <thead class="bg-gray-800 text-white">
-                    <tr>
-                        <th class="py-3 px-6 text-left">Product Name</th>
-                        <th class="py-3 px-6 text-left">Category</th>
-                        <th class="py-3 px-6 text-left">Price</th>
-                        <th class="py-3 px-6 text-left">Stock Quantity</th>
-                        <th class="py-3 px-6 text-left">Barcode</th>
-                        <th class="py-3 px-6 text-left">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Example Row -->
-                    <tr class="border-b">
-                        <td class="py-3 px-6">Product A</td>
-                        <td class="py-3 px-6">Category 1</td>
-                        <td class="py-3 px-6">$10.00</td>
-                        <td class="py-3 px-6">100</td>
-                        <td class="py-3 px-6">1234567890123</td>
-                        <td class="py-3 px-6 flex space-x-2">
-                            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">Update</button>
-                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Additional Rows -->
-                </tbody>
-            </table>
+        <div class="mt-6">
+            <h3 class="text-xl font-semibold mb-4">Insert New Product</h3>
+            <form id="barcodeForm" class="space-y-4">
+                <div class="flex space-x-4">
+                    <div class="w-1/5">
+                        <button id="scanButton" type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg">Scan to Insert</button>
+                        <!-- <label class="block text-gray-700">Barcode Number</label>
+                        <input id="barcodeInput" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"> -->
+                    </div>
+                </div>
+                <!-- <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg">Insert Product</button> -->
+            </form>
         </div>
+
+
+        <!-- Products Table -->
+<div class="overflow-x-auto shadow-md rounded-lg">
+    <table id="productsTable" class="min-w-full bg-white">
+        <thead class="bg-gray-800 text-white">
+            <tr>
+                <th class="py-3 px-6 text-left">Product Name</th>
+                <th class="py-3 px-6 text-left">Category</th>
+                <th class="py-3 px-6 text-left">Price</th>
+                <th class="py-3 px-6 text-left">Barcode</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be inserted here -->
+        </tbody>
+    </table>
+</div>
+
     
         <!-- Insert Product Form -->
-        <div class="mt-6">
+        <!-- <div class="mt-6">
             <h3 class="text-xl font-semibold mb-4">Insert New Product</h3>
             <form class="space-y-4">
                 <div class="flex space-x-4">
@@ -229,7 +242,7 @@
                 <button class="bg-green-500 text-white px-4 py-2 rounded-lg">Insert</button>
             </form>
         </div>
-    </div>
+    </div> -->
     
 
   <!-- Footer -->
@@ -238,10 +251,6 @@
 </footer>
 
 <script>
-    // Toggle sidebar visibility
-    document.getElementById('sidebarToggle').addEventListener('click', function () {
-        document.getElementById('sidebar').classList.toggle('show');
-    });
 
     // Toggle dark mode
     document.getElementById('darkModeToggle').addEventListener('click', function () {
@@ -263,6 +272,43 @@
             document.getElementById('loadingScreen').classList.add('hidden');
         }, 1000);
     };
+
+
+    // scanButton
+    document.getElementById('scanButton').addEventListener('click', function() {
+    // Send a message or trigger an action to the barcode scanner
+    window.open('/public/index.html', '_blank'); // Open the barcode scanner's page in a new tab/window
+  });
+// ----
+
+    document.getElementById('barcodeForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const barcode = document.getElementById('barcodeInput').value;
+
+    fetch(`/api/product/${barcode}`)
+        .then(response => response.json())
+        .then(product => {
+            if (product) {
+                const table = document.getElementById('productsTable').querySelector('tbody');
+                const row = document.createElement('tr');
+                row.classList.add('border-b');
+
+                row.innerHTML = `
+                    <td class="py-3 px-6">${product.productName}</td>
+                    <td class="py-3 px-6">${product.category}</td>
+                    <td class="py-3 px-6">${product.price}</td>
+                    <td class="py-3 px-6">${product.barcode_number}</td>
+                `;
+
+                table.appendChild(row);
+            } else {
+                alert('Product not found');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching product:', error);
+        });
+});
 </script>
 
 
