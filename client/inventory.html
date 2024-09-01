@@ -180,19 +180,32 @@
         <h2 class="text-3xl font-bold animate-pulse">Loading...</h2>
     </div>
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="shadow-lg">
-        <ul class="space-y-4 p-4">
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Dashboard</a></li>
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Products</a></li>
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Categories</a></li>
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Reports</a></li>
-            <li class="hover:text-blue-400 transition-colors duration-200"><a href="#">Settings</a></li>
-        </ul>
-    </div>
+      <!-- Sidebar -->
+      <div class="flex">
+        <aside class="w-64 bg-gray-800 h-screen">
+            <div class="p-4">
+                <h1 class="text-white text-2xl font-bold">Inventory Management</h1>
+            </div>
+            <nav class="mt-10">
+                <a href="/client/dash2.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg">
+                    <span class="ml-4">Dashboard</span>
+                </a>
+                <a href="/client/inventory.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Inventory</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Purchase Details</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Sales</span>
+                </a>
+                <a href="/client/manage_store.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    <span class="ml-4">Manage Store</span>
+                </a>
+            </nav>
+        </aside>
 
-    <!-- Sidebar Toggle Button -->
-    <button id="sidebarToggle">☰ Menu</button>
+
 
     <!-- Dark mode toggle -->
     <div class="p-4 text-right">
@@ -277,9 +290,9 @@
 
     <script>
         // Toggle sidebar visibility
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
-            document.getElementById('sidebar').classList.toggle('show');
-        });
+        // document.getElementById('sidebarToggle').addEventListener('click', function () {
+        //     document.getElementById('sidebar').classList.toggle('show');
+        // });
 
         // Toggle dark mode
         document.getElementById('darkModeToggle').addEventListener('click', function () {
@@ -306,3 +319,4 @@
 </body>
 
 </html>
+
