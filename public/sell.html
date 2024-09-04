@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sold Items</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+
+    <!-- Navigation Bar -->
+    <!-- <nav class="bg-gray-800 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white text-2xl font-extrabold tracking-wide">Inventory Management</a>
+            <div>
+                <button id="bnt" class="text-white bg-green-500 px-4 py-2 rounded-full shadow-lg hover:bg-green-600 transition-transform transform hover:scale-105">
+                    Sold Items
+                </button>
+            </div>
+        </div>
+    </nav> -->
+    <div class="flex">
+    <aside class="w-64 bg-gray-800 h-screen">
+        <div class="p-4">
+            <h1 class="text-white text-2xl font-bold">Inventory Management</h1>
+        </div>
+        <nav class="mt-10">
+            <a href="dash2.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg">
+                <span class="ml-4">Dashboard</span>
+            </a>
+            <a href="inventory.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                <span class="ml-4">Inventory</span>
+            </a>
+            <!-- <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                <span class="ml-4">Purchase Details</span>
+            </a> -->
+            <a href="sell.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                <span class="ml-4">Sell</span>
+            </a>
+            <!-- <a href="manage_store.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                <span class="ml-4">Manage Store</span>
+            </a> -->
+        </nav>
+    </aside>
+
+
+
+    <!-- Sold Items Page Content -->
+    <div class="container mx-auto mt-8">
+        <h1 class="text-3xl font-bold mb-6 text-center text-gray-700">Sold Items Overview</h1>
+
+        <!-- Sold Items Table -->
+        <div class="bg-white shadow-2xl rounded-lg overflow-hidden">
+            <table class="min-w-full bg-white" id="tablebody">
+                <thead>
+                    <tr class="bg-gray-800 text-white text-left uppercase text-sm leading-normal tracking-wide">
+                        <th class="py-4 px-6">Product</th>
+                        <th class="py-4 px-6">Catagary</th>
+                        <th class="py-4 px-6">Price</th>
+                        <th class="py-4 px-6">Barcode ID</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 text-sm font-medium">
+
+                
+
+                    <!-- Add more sold items as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Summary Section -->
+        <!-- <div class="mt-8 flex justify-end">
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded shadow-md">
+                <p class="font-semibold">Total Items Sold: <span class="font-bold">170</span></p>
+                <p class="font-semibold">Total Sales Revenue: <span class="font-bold">₹ 20,000</span></p>
+            </div>
+        </div> -->
+    </div>
+    </div>
+<script src="sell.js"></script>
+</body>
+</html>

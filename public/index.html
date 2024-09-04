@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="ZXing for JS">
+    <title>Barcode Scanner</title>
+    <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
+        href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+    <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
+        href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            font: 17px Calibri;
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="wrapper" style="padding-top:2em">
+        <section class="container" id="demo-content">
+            <h1 class="title">Scan barcode</h1>
+            <div style="display:flex">
+                <a class="button" id="startButton">Start</a>
+                <a class="button" id="resetButton">Stop</a>
+            </div>
+            <div>
+                <video id="video" width="600" height="400" style="border: 1px solid gray"></video>
+            </div>
+            <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Change video source:</label>
+                <select id="sourceSelect" style="max-width:400px">
+                </select>
+            </div>
+          
+            <label>Result:</label>
+            <pre><code id="result"></code></pre>
+
+        </section>
+        <footer class="footer">
+        </footer>
+    </main>
+    <script src="https://unpkg.com/@zxing/library@latest"></script>
+  
+    <script src="script.js"></script>
+   
+</body>
+
+</html>
