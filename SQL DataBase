@@ -1,0 +1,28 @@
+show databases;
+CREATE SCHEMA `new_schema` ;
+create table product (
+id bigint primary key,
+pname varchar(20),
+ptype varchar(20),
+price float
+);
+drop table product;
+insert into product (id,pname,ptype,price) values (89003978,"Iodex","Baam",30);
+insert into product (id,pname,ptype,price) values (8902242717963,"NoteBook","Book",76);
+insert into product (id,pname,ptype,price) values (7622201762476,"Dairy Milk","Chocolate",100);
+insert into product (id,pname,ptype,price) values (8901057510028,"Kangaroo","Stapler pin",40);
+create table storeproduct (
+id bigint,
+pname varchar(20),
+ptype varchar(20),
+price float
+);
+drop table storeproduct;
+
+create table sellproduct (
+id bigint,
+pname varchar(20),
+ptype varchar(20),
+price float
+);
+drop table sellproduct;
