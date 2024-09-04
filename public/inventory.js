@@ -29,6 +29,9 @@ const closePopupBtn = document.getElementById('closePopupBtn');
 openPopupBtn.addEventListener('click', () => {
     popupContainer.classList.remove('hidden');
 });
+bntsell.addEventListener('click', () => {
+    popupContainer.classList.remove('hidden');
+});
 
 // Optionally, close the popup when clicking outside the popup content
 window.addEventListener('click', (event) => {
@@ -169,11 +172,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
 bntsell.addEventListener('click', function () {
-    document.getElementById('vdo_div').classList.remove('hidden');
-
+    let vdo_div=document.getElementById('vdo_div');
+    vdo_div.classList.remove('hidden');
     let selectedDeviceId;
     const codeReader = new ZXing.BrowserBarcodeReader();
     let lastScannedCode = null;
@@ -195,58 +196,36 @@ bntsell.addEventListener('click', function () {
                 .then((result) => {
                     if (result.text !== lastScannedCode) {
                         lastScannedCode = result.text;
-                        console.log(result);
                         document.getElementById('result').innerHTML = "Product inserted";
                         console.log(result.text);
-                        fetch(`/storeproduct/:id?code=${encodeURIComponent(result.text)}`)
+
+                        fetch(`/sellproduct`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id: result.text
+                            })
+                        })
                             .then(response => response.json())
-                            .then(product => {
-                                if (product) {
-                                    console.log(result.text);
-                                    // const table = document.getElementById('inventoryTable').querySelector('tbody');
-                                    // const row = document.createElement('tr');
-                                    // row.classList.add('border-b');
-                                    // row.innerHTML = `
-                                    //     <td class="py-3 px-6">${product.pname}</td>
-                                    //     <td class="py-3 px-6">${product.ptype}</td>
-                                    //     <td class="py-3 px-6">${product.price}</td>
-                                    //     <td class="py-3 px-6">${product.id}</td>
-                                    // `;
-                                    // table.appendChild(row);
-
-                                    let pname = product.pname;
-                                    let ptype = product.ptype;
-                                    let price = product.price;
-                                    let id = product.id;
-
-                                    if (result.text == id) {
-                                        fetch('/sellproduct', {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json'
-                                            },
-                                            body: JSON.stringify({
-                                                id: id,
-                                                pname: pname,
-                                                ptype: ptype,
-                                                price: price
-                                            })
-                                        })
-                                            .then(response => response.json())
-                                            .then(data => {
-                                                console.log('Product saved:', data);
-                                            })
-                                            .catch(error => {
-                                                console.error('Error saving product:', error);
-                                            });
-                                    }
+                            .then(data => {
+                                if (data.success) {
+                                    console.log('Product moved to sellproduct:', data);
+                                } else {
+                                    console.error('Error:', data.message);
                                 }
                             })
                             .catch(error => {
-                                console.error('Error fetching product:', error);
+                                console.error('Error saving product:', error);
                             });
                     }
                     codeReader.reset();  // Stop the camera after scanning
+                    function autoRefresh() {
+                        window.location = window.location.href;
+                    }
+                    setInterval('autoRefresh()', 5000);
+                    autoRefresh();
                 })
                 .catch((err) => {
                     console.error('Scanning error:', err);
@@ -269,5 +248,4 @@ bntsell.addEventListener('click', function () {
         codeReader.reset();
         popupContainer.classList.add('hidden');
     });
-
 });
