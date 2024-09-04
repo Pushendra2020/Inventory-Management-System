@@ -108,19 +108,65 @@ app.post('/storeproduct', (req, res) => {
 });
 
 
-app.post('/sellproduct', (req, res) => {
-    const {id, pname, ptype, price } = req.body;
-    const sql = 'INSERT INTO sellproduct (id,pname, ptype, price) VALUES (?,?, ?, ?)';
 
-    db.query(sql, [id,pname, ptype, price], (err, result) => {
+
+app.post('/sellproduct', (req, res) => {
+    const { id } = req.body;
+    
+    // Check if the product exists in storeproduct
+    const selectQuery = 'SELECT * FROM storeproduct WHERE id = ?';
+    db.query(selectQuery, [id], (err, results) => {
         if (err) {
-            console.error('Error inserting data:', err);
-            res.status(500).json({ success: false, message: 'Failed to save product' });
-        } else {
-            res.json({ success: true, message: 'Product saved successfully!', id: result.insertId });
+            console.error('Error selecting data:', err);
+            return res.status(500).json({ success: false, message: 'Failed to find product' });
         }
+        
+        if (results.length === 0) {
+            return res.status(404).json({ success: false, message: 'Product not found in storeproduct' });
+        }
+
+        // If product exists, remove it from storeproduct and insert into sellproduct
+        const product = results[0];
+        const deleteQuery = 'DELETE FROM storeproduct WHERE id = ?';
+        const insertQuery = 'INSERT INTO sellproduct (id, pname, ptype, price) VALUES (?, ?, ?, ?)';
+
+        db.beginTransaction((err) => {
+            if (err) {
+                console.error('Error starting transaction:', err);
+                return res.status(500).json({ success: false, message: 'Transaction error' });
+            }
+
+            db.query(deleteQuery, [id], (err, deleteResult) => {
+                if (err) {
+                    return db.rollback(() => {
+                        console.error('Error deleting data:', err);
+                        res.status(500).json({ success: false, message: 'Failed to delete product' });
+                    });
+                }
+
+                db.query(insertQuery, [product.id, product.pname, product.ptype, product.price], (err, insertResult) => {
+                    if (err) {
+                        return db.rollback(() => {
+                            console.error('Error inserting data:', err);
+                            res.status(500).json({ success: false, message: 'Failed to save product' });
+                        });
+                    }
+
+                    db.commit((err) => {
+                        if (err) {
+                            return db.rollback(() => {
+                                console.error('Error committing transaction:', err);
+                                res.status(500).json({ success: false, message: 'Transaction commit error' });
+                            });
+                        }
+                        res.json({ success: true, message: 'Product moved to sellproduct successfully!' });
+                    });
+                });
+            });
+        });
     });
 });
+
 
 
 
