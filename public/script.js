@@ -2,6 +2,8 @@
 
 
 
+
+
 window.addEventListener('load', function () {
     let selectedDeviceId;
     const codeReader = new ZXing.BrowserBarcodeReader();
