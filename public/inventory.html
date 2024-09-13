@@ -126,66 +126,62 @@
             /* Ensure it takes full height of the viewport */
         }
 
-        /* Dark mode toggle icon rotation */
+        /* Dark mode toggle icon rotation
         #darkModeToggle .toggle-icon {
             transition: transform 0.5s ease;
-        }
+        } */
 
-        /* Change icon rotation for dark mode */
+        /* Change icon rotation for dark mode
         .dark-mode #darkModeToggle .toggle-icon {
             transform: rotate(180deg);
-        }
+        } */
 
         /* Text color transition */
         body {
             transition: color 0.3s ease;
         }
+
+        /* Dark mode background */
+        /* .dark-mode {
+    background: linear-gradient(to bottom right, #1a202c, #2d3748, #4a5568);
+    color: #f7fafc; text-gray-100 */
+        /* Dark mode transition */
     </style>
 </head>
 
-<body class="bg-gray-100 fade-in">
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600 text-gray-100 h-screen">
 
     <!-- Loading Screen -->
-    <div id="loadingScreen">
+    <!-- <div id="loadingScreen" class="flex items-center justify-center h-screen bg-gray-100 animate-fadeIn">
         <h2 class="text-3xl font-bold animate-pulse">Loading...</h2>
-    </div>
+    </div> -->
 
     <!-- Sidebar -->
     <div class="flex">
-        <aside class="w-64 bg-gray-800 h-screen">
+        <aside class="w-64 bg-gray-900 h-screen animate-slideInLeft shadow-lg">
             <div class="p-4">
-                <h1 class="text-white text-2xl font-bold">Inventory Management</h1>
+                <h1 class="text-white text-3xl font-bold tracking-wide">Inventory</h1>
             </div>
             <nav class="mt-10">
                 <a href="dash2.html"
-                    class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg">
+                    class="flex items-center text-gray-400 hover:bg-gray-700 hover:text-white p-2 rounded-lg transition-transform transform hover:translate-x-3">
                     <span class="ml-4">Dashboard</span>
                 </a>
                 <a href="inventory.html"
-                    class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    class="flex items-center text-gray-400 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2 transition-transform transform hover:translate-x-3">
                     <span class="ml-4">Inventory</span>
                 </a>
-                <!-- <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
-                    <span class="ml-4">Purchase Details</span>
-                </a> -->
                 <a href="sell.html"
-                    class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                    class="flex items-center text-gray-400 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2 transition-transform transform hover:translate-x-3">
                     <span class="ml-4">Sell</span>
                 </a>
-                <!-- <a href="manage_store.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
-                    <span class="ml-4">Manage Store</span>
-                </a> -->
             </nav>
         </aside>
 
-
-
-
         <!-- Dark mode toggle -->
         <div class="p-4 text-right">
-            <button id="darkModeToggle"
-                class="bg-gray-800 text-white px-4 py-2 rounded-lg transform transition-transform duration-200">
-                <span class="toggle-icon">🌙</span> Toggle Dark Mode
+            <button id="darkModeToggle">
+
             </button>
         </div>
 
@@ -204,35 +200,32 @@
                 <div class="flex gap-10">
                     <div class="flex justify-center mb-6">
                         <input type="text" id="searchBar" placeholder="Search inventory..."
-                            class="search-bar w-full max-w-lg px-4 py-2 rounded-lg border-2 focus:border-blue-500 transition-all duration-300">
+                            class="search-bar w-full max-w-lg px-4 py-2 rounded-lg border-2 focus:border-blue-500 transition-all duration-300 shadow-lg transform hover:scale-105">
                     </div>
                     <button id="bntsell"
-                        class="pointer bg-red-500 rounded-md text-white h-10 px-8 mt-1 mr-8">Sell</button>
+                        class="pointer bg-red-500 rounded-md text-white h-10 px-8 mt-1 mr-8 transition-transform duration-200 hover:scale-110">Sell</button>
                 </div>
                 <div id="popupContainer" class="popup hidden bg-slate-500 pt-10">
                     <div
-                        class="popup-content  bg-gray-300 shadow-xl px-2 backdrop-opacity-10 z-10 bg-transparent rounded-md">
+                        class="popup-content bg-gray-300 shadow-xl px-2 backdrop-opacity-10 z-10 bg-transparent rounded-md transition-transform transform duration-300 ease-in-out hover:scale-105">
                         <span id="closePopupBtn"
-                            class="cursor-pointer hover:bg-red-400 text-xl font-bold hover:text-white text-black px-2 ">&times;</span>
+                            class="cursor-pointer hover:bg-red-400 text-xl font-bold hover:text-white text-black px-2 transition-all duration-200">&times;</span>
                         <div style="display:flex">
-
-                            <!-- <a class="button" id="startButton">Start</a> -->
                             <button
-                                class="button cursor-pointer bg-red-500 rounded-md text-white h-10 px-8 mt-5 text-center"
+                                class="button cursor-pointer bg-red-500 rounded-md text-white h-10 px-8 mt-5 text-center hover:bg-red-600 transition duration-300"
                                 id="resetButton">Stop</button>
                         </div>
-                        <!-- Scanning Section -->
                         <div class="p-6">
                             <h2 class="text-2xl font-semibold mb-4">Scan Product</h2>
                             <form id="barcodeForm" class="space-y-4">
                                 <div class="flex space-x-4">
                                     <div class="w-1/5">
-                                        <div id="vdo_div" class="hidden h-52 w-64">
+                                        <div id="vdo_div"
+                                            class="hidden h-52 w-64 transform transition-transform duration-300">
                                             <video id="video" width="600" height="400"
-                                                style="border: 1px solid gray"></video>
+                                                class="rounded-lg shadow-lg transform hover:scale-105"></video>
                                         </div>
-                                        <div id="sourceSelectPanel" style="display:none">
-                                            <!-- <label for="sourceSelect">Change video source:</label> -->
+                                        <div id="sourceSelectPanel" class="hidden">
                                             <select id="sourceSelect" style="max-width:400px" class="hidden"></select>
                                         </div>
                                     </div>
@@ -244,32 +237,37 @@
             </div>
             <!-- Inventory Table -->
             <div class="overflow-x-auto">
-                <table id="inventoryTable" class="min-w-full bg-white rounded-lg shadow-md inventory-table">
+                <table id="inventoryTable"
+                    class="min-w-full bg-white rounded-lg shadow-md inventory-table transition-opacity duration-500 hover:opacity-90">
                     <thead class="bg-gray-800 text-white">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
-                                Product
-                                Name</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
-                                Category
-                            </th>
-
-                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
+                                Product Name</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
+                                Category</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
                                 Price</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID
-                            </th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
+                                ID</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
+                                QUANTITY</th>
                         </tr>
                     </thead>
-                    <tbody id="inventoryTableBody">
+                    <tbody class="text-gray-700 text-sm font-medium" id="inventoryTableBody">
 
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <!-- <button id="bntsell" class="pointer  bg-red-500 rounded-md text-white h-16 px-8 mt-2 mr-8">Sell</button> -->
+
     <!-- Floating action button -->
-    <button class="floating-btn" id="openPopupBtn">+</button>
+    <button class="floating-btn animate-bounce" id="openPopupBtn">+</button>
 
     <!-- Popup container -->
 
@@ -278,6 +276,7 @@
     <pre class="hidden"><code id="result"></code></pre>
     </div>
     </div>
+
 
     <!-- Footer -->
 
