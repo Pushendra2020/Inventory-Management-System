@@ -7,7 +7,7 @@
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans">
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600 text-gray-100 h-screen">
 
     <!-- Navigation Bar -->
     <!-- <nav class="bg-gray-800 p-4 shadow-lg">
@@ -21,34 +21,28 @@
         </div>
     </nav> -->
     <div class="flex">
-    <aside class="w-64 bg-gray-800 h-screen">
-        <div class="p-4">
-            <h1 class="text-white text-2xl font-bold">Inventory Management</h1>
-        </div>
-        <nav class="mt-10">
-            <a href="dash2.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg">
-                <span class="ml-4">Dashboard</span>
-            </a>
-            <a href="inventory.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
-                <span class="ml-4">Inventory</span>
-            </a>
-            <!-- <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
-                <span class="ml-4">Purchase Details</span>
-            </a> -->
-            <a href="sell.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
-                <span class="ml-4">Sell</span>
-            </a>
-            <!-- <a href="manage_store.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
-                <span class="ml-4">Manage Store</span>
-            </a> -->
-        </nav>
-    </aside>
-
+        <div class="flex">
+            <aside class="w-64 bg-gray-900 h-screen animate-slideInLeft shadow-lg">
+                <div class="p-4">
+                    <h1 class="text-white text-3xl font-bold tracking-wide">Inventory</h1>
+                </div>
+                <nav class="mt-10">
+                    <a href="dash2.html" class="flex items-center text-gray-400 hover:bg-gray-700 hover:text-white p-2 rounded-lg transition-transform transform hover:translate-x-3">
+                        <span class="ml-4">Dashboard</span>
+                    </a>
+                    <a href="inventory.html" class="flex items-center text-gray-400 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2 transition-transform transform hover:translate-x-3">
+                        <span class="ml-4">Inventory</span>
+                    </a>
+                    <a href="sell.html" class="flex items-center text-gray-400 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2 transition-transform transform hover:translate-x-3">
+                        <span class="ml-4">Sell</span>
+                    </a>
+                </nav>
+            </aside>
 
 
     <!-- Sold Items Page Content -->
     <div class="container mx-auto mt-8">
-        <h1 class="text-3xl font-bold mb-6 text-center text-gray-700">Sold Items Overview</h1>
+        <h1 class="text-3xl font-bold mb-6 text-center text-white-700">Sold Items Overview</h1>
 
         <!-- Sold Items Table -->
         <div class="bg-white shadow-2xl rounded-lg overflow-hidden">
@@ -56,9 +50,11 @@
                 <thead>
                     <tr class="bg-gray-800 text-white text-left uppercase text-sm leading-normal tracking-wide">
                         <th class="py-4 px-6">Product</th>
-                        <th class="py-4 px-6">Catagary</th>
+                        <th class="py-4 px-6">Category</th>
                         <th class="py-4 px-6">Price</th>
                         <th class="py-4 px-6">Barcode ID</th>
+                        <th class="py-4 px-6">QUANTITY</th>
+                        
                     </tr>
                 </thead>
                 <tbody class="text-gray-700 text-sm font-medium">
