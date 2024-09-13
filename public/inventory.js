@@ -1,4 +1,3 @@
-
 // Toggle dark mode
 document.getElementById('darkModeToggle').addEventListener('click', function () {
     document.body.classList.toggle('dark-mode');
@@ -76,18 +75,21 @@ scanButton.addEventListener('click', function () {
                                     const table = document.getElementById('inventoryTable').querySelector('tbody');
                                     const row = document.createElement('tr');
                                     row.classList.add('border-b');
-                                    row.innerHTML = `
-                                        <td class="py-3 px-6">${product.pname}</td>
-                                        <td class="py-3 px-6">${product.ptype}</td>
-                                        <td class="py-3 px-6">${product.price}</td>
-                                        <td class="py-3 px-6">${product.id}</td>
-                                    `;
-                                    table.appendChild(row);
-
                                     let pname = product.pname;
                                     let ptype = product.ptype;
                                     let price = product.price;
                                     let id = product.id;
+                                    let qunti = product.qunti;
+                                    qunti = qunti + 1;
+                                    row.innerHTML = `
+                                    <td class="py-3 px-6">${product.pname}</td>
+                                        <td class="py-3 px-6">${product.ptype}</td>
+                                        <td class="py-3 px-6">${product.price}</td>
+                                        <td class="py-3 px-6">${product.id}</td>
+                                        <td class="py-3 px-6">${qunti}</td>
+                                    `;
+                                    table.appendChild(row);
+
 
                                     fetch('/storeproduct', {
                                         method: 'POST',
@@ -98,7 +100,8 @@ scanButton.addEventListener('click', function () {
                                             id: id,
                                             pname: pname,
                                             ptype: ptype,
-                                            price: price
+                                            price: price,
+                                            qunti: qunti
                                         })
                                     })
                                         .then(response => response.json())
@@ -116,8 +119,13 @@ scanButton.addEventListener('click', function () {
                             .catch(error => {
                                 console.error('Error fetching product:', error);
                             });
+                    } codeReader.reset();
+                    function autoRefresh() {
+                        window.location = window.location.href;
                     }
-                    codeReader.reset();  // Stop the camera after scanning
+                    setInterval('autoRefresh()', 5000);
+                    autoRefresh();
+                     // Stop the camera after scanning
                 })
                 .catch((err) => {
                     console.error('Scanning error:', err);
@@ -158,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td class="py-3 px-6">${product.ptype}</td>
                     <td class="py-3 px-6">${product.price}</td>
                     <td class="py-3 px-6">${product.id}</td>
+                    <td class="py-3 px-6">${product.qunti}</td>
                 `;
                 // table.insertBefore(row, table.firstChild);  // Insert each row at the top
                 table.appendChild(row);
@@ -173,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 bntsell.addEventListener('click', function () {
-    let vdo_div=document.getElementById('vdo_div');
+    let vdo_div = document.getElementById('vdo_div');
     vdo_div.classList.remove('hidden');
     let selectedDeviceId;
     const codeReader = new ZXing.BrowserBarcodeReader();
@@ -220,7 +229,7 @@ bntsell.addEventListener('click', function () {
                                 console.error('Error saving product:', error);
                             });
                     }
-                    codeReader.reset();  // Stop the camera after scanning
+                    codeReader.reset();
                     function autoRefresh() {
                         window.location = window.location.href;
                     }
