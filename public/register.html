@@ -6,37 +6,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #121212 0%, #1e1e1e 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .card {
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 16px;
+            position: relative;
+            box-shadow: 0px 4px 15px rgba(100, 181, 246, 0.5);
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #64b5f6, #42a5f5);
+            background-size: 400% 400%;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.6;
+            transition: opacity 0.5s ease-in-out;
+            animation: gradient-border 8s infinite;
+        }
+
+        .card:hover::before {
+            opacity: 0.8;
+        }
+
+        @keyframes gradient-border {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .gradient-text {
+    background: linear-gradient(90deg, #64b5f6, #42a5f5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Ensure this is set */
+}
+
+
+        .input-focus:focus {
+            box-shadow: 0 0 8px rgba(100, 181, 246, 0.5);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(90deg, #64b5f6, #42a5f5);
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Create Account</h2>
+<body class="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <div class="w-full max-w-md p-8 card">
+        <h2 class="text-4xl font-extrabold text-center mb-8 gradient-text">Create Account</h2>
+
         <form action="#" method="post" id="registerForm">
-            <div class="mb-4">
-                <label for="name" class="block text-gray-700 font-bold mb-2">Full Name</label>
+            <div class="mb-6">
+                <label for="name" class="block text-lg font-semibold text-gray-300 mb-2">Full Name</label>
                 <input type="text" id="name" name="name"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-800 text-gray-200 focus:outline-none input-focus transition-all"
                     placeholder="Enter your full name" required>
             </div>
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
+            <div class="mb-6">
+                <label for="email" class="block text-lg font-semibold text-gray-300 mb-2">Email</label>
                 <input type="email" id="email" name="email"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-800 text-gray-200 focus:outline-none input-focus transition-all"
                     placeholder="Enter your email" required>
             </div>
             <div class="mb-6">
-                <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
+                <label for="password" class="block text-lg font-semibold text-gray-300 mb-2">Password</label>
                 <input type="password" id="password" name="password"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-800 text-gray-200 focus:outline-none input-focus transition-all"
                     placeholder="Create a password" required>
             </div>
-            <div class="flex items-center justify-between">
+
+            <div class="flex justify-center">
                 <button type="submit"
-                    class="w-full bg-blue-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create Account</button>
+                    class="w-full py-3 text-white font-bold rounded-lg btn-gradient hover:opacity-90 transition-all">
+                    Create Account
+                </button>
             </div>
         </form>
-        <p class="text-gray-600 text-center mt-6">
-            Already have an account? <a href="login.html" class="text-blue-500 hover:underline">Login</a>
+        <p class="text-center text-gray-400 mt-6">
+            Already have an account? 
+            <a href="login.html" class="text-blue-500 hover:text-blue-600 font-medium">Login</a>
         </p>
     </div>
 </body>
