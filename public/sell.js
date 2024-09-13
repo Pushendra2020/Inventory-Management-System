@@ -1,3 +1,4 @@
+
 // let bnt=document.getElementById('bnt');
 
 
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <td class="py-3 px-6">${product.ptype}</td>
             <td class="py-3 px-6">${product.price}</td>
             <td class="py-3 px-6">${product.id}</td>
+            <td class="py-3 px-6">${product.qunti}</td>
         `;
                 // table.insertBefore(row, table.firstChild);  // Insert each row at the top
                 table.appendChild(row);
