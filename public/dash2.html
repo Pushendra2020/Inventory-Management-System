@@ -6,113 +6,105 @@
     <title>Inventory Management Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600 text-gray-100 h-screen">
 
     <!-- Sidebar -->
     <div class="flex">
-        <aside class="w-64 bg-gray-800 h-screen">
+        <aside class="w-64 bg-gray-900 h-screen animate-slideInLeft shadow-lg">
             <div class="p-4">
-                <h1 class="text-white text-2xl font-bold">Inventory Management</h1>
+                <h1 class="text-white text-3xl font-bold tracking-wide">Inventory</h1>
             </div>
             <nav class="mt-10">
-                <a href="dash2.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg">
+                <a href="dash2.html" class="flex items-center text-gray-400 hover:bg-gray-700 hover:text-white p-2 rounded-lg transition-transform transform hover:translate-x-3">
                     <span class="ml-4">Dashboard</span>
                 </a>
-                <a href="inventory.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                <a href="inventory.html" class="flex items-center text-gray-400 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2 transition-transform transform hover:translate-x-3">
                     <span class="ml-4">Inventory</span>
                 </a>
-                <!-- <a href="#" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
-                    <span class="ml-4">Purchase Details</span>
-                </a> -->
-                <a href="sell.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
+                <a href="sell.html" class="flex items-center text-gray-400 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2 transition-transform transform hover:translate-x-3">
                     <span class="ml-4">Sell</span>
                 </a>
-                <!-- <a href="manage_store.html" class="flex items-center text-gray-300 hover:bg-gray-700 hover:text-white p-2 rounded-lg mt-2">
-                    <span class="ml-4">Manage Store</span>
-                </a> -->
             </nav>
         </aside>
 
         <!-- Main Content -->
         <main class="flex-1 p-6 relative">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-semibold">Dashboard</h2>
+                <h2 class="text-3xl font-semibold text-white">Dashboard</h2>
                 <div class="flex items-center space-x-4">
-                    <span class="text-gray-500">abcd bcd</span>
-                    <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-lg" id="profileBtn">Profile</a>
-                    <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-lg" id="signupBtn">Sign Up</a>
-                    <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-lg" id="loginBtn">Login</a>
+                    <span class="text-gray-300">abcd bcd</span>
+                    <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 hover:scale-105 transition-transform">Profile</a>
+                    <a href="#" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:scale-105 transition-transform">Sign Up</a>
+                    <a href="#" class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 hover:scale-105 transition-transform">Login</a>
                 </div>
             </div>
 
             <!-- Dashboard Cards -->
             <div class="grid grid-cols-4 gap-6 mb-6">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-xs uppercase">Sales</h3>
-                    <p class="text-xl font-semibold">$0</p>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:scale-105">
+                    <h3 class="text-gray-400 text-xs uppercase">Sales</h3>
+                    <p class="text-2xl font-semibold">$0</p>
                     <span class="text-green-500 text-sm">+67.81%</span>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-xs uppercase">Purchase</h3>
-                    <p class="text-xl font-semibold">$0</p>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:scale-105">
+                    <h3 class="text-gray-400 text-xs uppercase">Purchase</h3>
+                    <p class="text-2xl font-semibold">$0</p>
                     <span class="text-red-500 text-sm">-67.81%</span>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-xs uppercase">Total Products</h3>
-                    <p class="text-xl font-semibold">0</p>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:scale-105">
+                    <h3 class="text-gray-400 text-xs uppercase">Total Products</h3>
+                    <p class="text-2xl font-semibold">0</p>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-xs uppercase">Total Stores</h3>
-                    <p class="text-xl font-semibold">0</p>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:scale-105">
+                    <h3 class="text-gray-400 text-xs uppercase">Total Stores</h3>
+                    <p class="text-2xl font-semibold">0</p>
                     <span class="text-red-500 text-sm">-67.81%</span>
                 </div>
             </div>
 
             <!-- Recent Inventory Movements Table -->
-            <div class="bg-white p-6 rounded-lg shadow">
-                <h3 class="text-xl font-semibold mb-4">Recent Inventory Movements</h3>
-                <table class="min-w-full bg-white">
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-4 text-white">Recent Inventory Movements</h3>
+                <table class="min-w-full bg-gray-900 text-gray-300 rounded-lg">
                     <thead>
                         <tr>
-                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Date</th>
-                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Product</th>
-                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Action</th>
-                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Quantity</th>
-                            <th class="py-2 text-left text-sm text-gray-600 font-bold">Store</th>
+                            <th class="py-2 text-left text-sm text-gray-400 font-bold">Date</th>
+                            <th class="py-2 text-left text-sm text-gray-400 font-bold">Product</th>
+                            <th class="py-2 text-left text-sm text-gray-400 font-bold">Action</th>
+                            <th class="py-2 text-left text-sm text-gray-400 font-bold">Quantity</th>
+                            <th class="py-2 text-left text-sm text-gray-400 font-bold">Store</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="py-2 text-sm text-gray-700">2024-08-28</td>
-                            <td class="py-2 text-sm text-gray-700">Product A</td>
-                            <td class="py-2 text-sm text-gray-700">Added</td>
-                            <td class="py-2 text-sm text-gray-700">150</td>
-                            <td class="py-2 text-sm text-gray-700">Store 1</td>
+                        <tr class="hover:bg-gray-700 transition">
+                            <td class="py-2 text-sm">2024-08-28</td>
+                            <td class="py-2 text-sm">Product A</td>
+                            <td class="py-2 text-sm">Added</td>
+                            <td class="py-2 text-sm">150</td>
+                            <td class="py-2 text-sm">Store 1</td>
                         </tr>
-                        <tr>
-                            <td class="py-2 text-sm text-gray-700">2024-08-27</td>
-                            <td class="py-2 text-sm text-gray-700">Product B</td>
-                            <td class="py-2 text-sm text-gray-700">Removed</td>
-                            <td class="py-2 text-sm text-gray-700">100</td>
-                            <td class="py-2 text-sm text-gray-700">Store 2</td>
+                        <tr class="hover:bg-gray-700 transition">
+                            <td class="py-2 text-sm">2024-08-27</td>
+                            <td class="py-2 text-sm">Product B</td>
+                            <td class="py-2 text-sm">Removed</td>
+                            <td class="py-2 text-sm">100</td>
+                            <td class="py-2 text-sm">Store 2</td>
                         </tr>
-                        <!-- Add more rows as necessary -->
                     </tbody>
                 </table>
             </div>
 
             <!-- Low Stock Alerts -->
-            <div class="bg-white p-6 rounded-lg shadow mt-6">
-                <h3 class="text-xl font-semibold mb-4">Low Stock Alerts</h3>
-                <ul class="list-disc pl-5 text-sm text-gray-600">
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg mt-6">
+                <h3 class="text-xl font-semibold mb-4 text-white">Low Stock Alerts</h3>
+                <ul class="list-disc pl-5 text-sm text-gray-400">
                     <li>Product C - Only 5 units left</li>
                     <li>Product D - Only 3 units left</li>
-                    <!-- Add more alerts as necessary -->
                 </ul>
             </div>
 
             <!-- Profile Page -->
-            <div id="profilePage" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
+            <div id="profilePage" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center opacity-0 transition-opacity duration-500">
                 <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
                     <h2 class="text-2xl font-bold mb-4 text-center">Profile</h2>
                     <div class="flex flex-col items-center mb-6">
@@ -135,7 +127,7 @@
                         </div>
                     </div>
                     <div class="flex justify-end mt-6">
-                        <button class="bg-red-500 text-white px-4 py-2 rounded-lg" id="closeProfile">Close</button>
+                        <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform" id="closeProfile">Close</button>
                     </div>
                 </div>
             </div>
@@ -143,51 +135,76 @@
     </div>
 
     <!-- Signup and Login Modals -->
-    <div id="signupModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+    <div id="signupModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-500">
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
             <h2 class="text-xl font-bold mb-4">Sign Up</h2>
             <form id="signupForm">
                 <div class="mb-4">
                     <label for="signupUsername" class="block text-gray-700">Username</label>
-                    <input type="text" id="signupUsername" class="mt-1 p-2 w-full border rounded-lg" required>
+                    <input type="text" id="signupUsername" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div class="mb-4">
                     <label for="signupEmail" class="block text-gray-700">Email</label>
-                    <input type="email" id="signupEmail" class="mt-1 p-2 w-full border rounded-lg" required>
+                    <input type="email" id="signupEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div class="mb-4">
                     <label for="signupPassword" class="block text-gray-700">Password</label>
-                    <input type="password" id="signupPassword" class="mt-1 p-2 w-full border rounded-lg" required>
+                    <input type="password" id="signupPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
                 </div>
-                <div class="flex justify-end">
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Sign Up</button>
-                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 hover:scale-105 transition-transform">Sign Up</button>
             </form>
         </div>
     </div>
 
-    <div id="loginModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+    <!-- Login Modal -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-500">
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
             <h2 class="text-xl font-bold mb-4">Login</h2>
             <form id="loginForm">
                 <div class="mb-4">
-                    <label for="loginUsername" class="block text-gray-700">Username</label>
-                    <input type="text" id="loginUsername" class="mt-1 p-2 w-full border rounded-lg" required>
+                    <label for="loginEmail" class="block text-gray-700">Email</label>
+                    <input type="email" id="loginEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
                 </div>
                 <div class="mb-4">
                     <label for="loginPassword" class="block text-gray-700">Password</label>
-                    <input type="password" id="loginPassword" class="mt-1 p-2 w-full border rounded-lg" required>
+                    <input type="password" id="loginPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
                 </div>
-                <div class="flex justify-end">
-                    <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded-lg">Login</button>
-                </div>
+                <button type="submit" class="w-full bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 hover:scale-105 transition-transform">Login</button>
             </form>
         </div>
     </div>
 
-    <script src="dash2.js">
-     
+    <!-- JavaScript to handle modal toggles -->
+    <script>
+        const profilePage = document.getElementById('profilePage');
+        const signupModal = document.getElementById('signupModal');
+        const loginModal = document.getElementById('loginModal');
+        const closeProfileButton = document.getElementById('closeProfile');
+
+        // Toggle profile modal
+        document.querySelector('a[href="#"]').addEventListener('click', () => {
+            profilePage.classList.toggle('hidden');
+            profilePage.classList.toggle('opacity-0');
+        });
+
+        // Close profile modal
+        closeProfileButton.addEventListener('click', () => {
+            profilePage.classList.add('hidden');
+            profilePage.classList.add('opacity-0');
+        });
+
+        // Toggle sign up modal
+        document.querySelector('.bg-green-600').addEventListener('click', () => {
+            signupModal.classList.toggle('hidden');
+            signupModal.classList.toggle('opacity-0');
+        });
+
+        // Toggle login modal
+        document.querySelector('.bg-yellow-600').addEventListener('click', () => {
+            loginModal.classList.toggle('hidden');
+            loginModal.classList.toggle('opacity-0');
+        });
     </script>
+
 </body>
 </html>
-
