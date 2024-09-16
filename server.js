@@ -1,8 +1,8 @@
 const mysql = require('mysql2');
 const express = require('express');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 const cors = require('cors');
-
 const app = express();
 const port = 5500;
 
@@ -26,6 +26,54 @@ db.connect((err) => {
     }
     console.log('Connected to the MySQL database.');
 });
+
+// Route for handling account creation (Register)
+app.post('/register', async (req, res) => {
+    const { name, email, password } = req.body;
+
+    try {
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Insert user into the database
+        const sql = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
+        db.query(sql, [name, email, hashedPassword], (err, result) => {
+            if (err) throw err;
+            res.send('User registered successfully');
+        });
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+});
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+
+    // Find the user in the database by email
+    const sql = 'SELECT * FROM users WHERE email = ?';
+    db.query(sql, [email], async (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Server error' });
+        }
+
+        if (results.length === 0) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+
+        const user = results[0];
+
+        // Compare the password with the hashed password in the database
+        const isMatch = await bcrypt.compare(password, user.password);
+        
+        if (!isMatch) {
+            return res.status(401).json({ error: 'Invalid email or password' });
+        }
+
+        // If password matches, send a success response and return to stop further execution
+        return res.json({ success: true, redirectUrl: '/dash2.html' });
+    });
+});
+
 
 // Route for scanning products
 app.post('/scan', (req, res) => {
@@ -248,6 +296,7 @@ function moveToSellProduct(product, connection, callback) {
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+
 
 
 
