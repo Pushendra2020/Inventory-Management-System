@@ -6,10 +6,28 @@
     <title>Inventory Management Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-</head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600 text-gray-100 h-screen">
+    <style>
+              /* Notification message */
+              .notification {
+            position: fixed;
+            top: -60px;
+            right: 20px;
+            background-color: #38a169;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            transition: top 0.5s ease;
+            z-index: 1000;
+        }
 
-    <!-- Sidebar -->
+        .notification.show {
+            top: 20px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600 text-gray-100 h-screen"  >
+
+   <!-- Sidebar (Static) -->
     <div class="flex">
         <aside class="w-64 bg-gray-900 h-screen animate-slideInLeft shadow-lg">
             <div class="p-4">
@@ -27,6 +45,11 @@
                 </a>
             </nav>
         </aside>
+
+  <!-- Notification message -->
+        <div id="notification" class="notification">
+            Welcome to the Inventory Management System!
+        </div>
 
         <!-- Main Content -->
         <main class="flex-1 p-6 relative">
@@ -106,10 +129,10 @@
 
             <!-- Profile Page -->
             <div id="profilePage" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center opacity-0 transition-opacity duration-500">
-                <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full">
-                    <h2 class="text-2xl font-bold mb-4 text-center">Profile</h2>
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg max-w-lg w-full">
+                    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform" id="profileBtn">Profile</button>
                     <div class="flex flex-col items-center mb-6">
-                        <img src="385.webp" alt="Profile Picture" class="rounded-full mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <img src= 'assets\385[1].webp' alt="Profile Picture" class="rounded-full mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <h3 class="text-xl font-semibold">abcd bcd</h3>
                         <p class="text-gray-600">abcd@example.com</p>
                     </div>
@@ -135,8 +158,8 @@
         </main>
     </div>
 
-    <!-- Signup and Login Modals -->
-    <div id="signupModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-500">
+    <!-- Signup Modal -->
+    <!-- <div id="signupModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-500">
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
             <h2 class="text-xl font-bold mb-4">Sign Up</h2>
             <form id="signupForm">
@@ -155,10 +178,10 @@
                 <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 hover:scale-105 transition-transform">Sign Up</button>
             </form>
         </div>
-    </div>
+    </div> -->
 
     <!-- Login Modal -->
-    <div id="loginModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-500">
+    <!-- <div id="loginModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-500">
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
             <h2 class="text-xl font-bold mb-4">Login</h2>
             <form id="loginForm">
@@ -173,7 +196,7 @@
                 <button type="submit" class="w-full bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 hover:scale-105 transition-transform">Login</button>
             </form>
         </div>
-    </div>
+    </div> -->
 
   <script>
       function showToast(message, type) {
@@ -185,6 +208,7 @@
             showToast('Logged in successfully!', 'success');
         });
   </script>
+  <script src="dash2.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </body>
 </html>
