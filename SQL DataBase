@@ -1,31 +1,46 @@
-show databases;
-CREATE SCHEMA `new_schema` ;
+-- show databases;
+-- CREATE SCHEMA `new_schema` ;
 create table product (
 id bigint primary key,
 pname varchar(20),
 ptype varchar(20),
-price float
+price float,
+qunti integer
 );
 drop table product;
-insert into product (id,pname,ptype,price) values (89003978,"Iodex","Baam",30);
-insert into product (id,pname,ptype,price) values (8902242717963,"NoteBook","Book",76);
-insert into product (id,pname,ptype,price) values (7622201762476,"Dairy Milk","Chocolate",100);
-insert into product (id,pname,ptype,price) values (8901057510028,"Kangaroo","Stapler pin",40);
-create table storeproduct (
-id bigint,
-pname varchar(20),
-ptype varchar(20),
-price float
-);
-drop table storeproduct;
+insert into product (id,pname,ptype,price,qunti) values (89003978,"Iodex","Baam",30,0);
+insert into product (id,pname,ptype,price,qunti) values (8902242717963,"NoteBook","Book",76,0);
+insert into product (id,pname,ptype,price,qunti) values (8902242718243,"Long NoteBook","Book",76,0);
 
-create table sellproduct (
+insert into product (id,pname,ptype,price,qunti) values (7622201762476,"Dairy Milk","Chocolate",100,0);
+insert into product (id,pname,ptype,price,qunti) values (8901057510028,"Kangaroo","Stapler pin",40,0);
+insert into product (id,pname,ptype,price,qunti) values (6971123984109,"Desert Erasers","Eraser",60,0);
+insert into product (id,pname,ptype,price,qunti) values (8901719129452,"JimJam","Biscuit",35,0);
+
+ create table storeproduct (
+ id bigint,
+ pname varchar(20),
+ ptype varchar(20),
+price float,
+qunti integer
+ );
+ drop table storeproduct;
+
+ create table sellproduct (
 id bigint,
 pname varchar(20),
 ptype varchar(20),
-price float
+ price float,
+ qunti integer
 );
-drop table sellproduct;
+ drop table sellproduct;
+ 
+
+
+
+-- show databases;
+-- CREATE SCHEMA `new_schema` ;
+drop table users;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,7 +49,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-
-
 select * from users;
+
+
+
+SELECT qunti FROM  soham_sellproduct;
