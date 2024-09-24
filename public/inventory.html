@@ -126,35 +126,14 @@
             /* Ensure it takes full height of the viewport */
         }
 
-        /* Dark mode toggle icon rotation
-        #darkModeToggle .toggle-icon {
-            transition: transform 0.5s ease;
-        } */
-
-        /* Change icon rotation for dark mode
-        .dark-mode #darkModeToggle .toggle-icon {
-            transform: rotate(180deg);
-        } */
-
         /* Text color transition */
         body {
             transition: color 0.3s ease;
         }
-
-        /* Dark mode background */
-        /* .dark-mode {
-    background: linear-gradient(to bottom right, #1a202c, #2d3748, #4a5568);
-    color: #f7fafc; text-gray-100 */
-        /* Dark mode transition */
     </style>
 </head>
 
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600 text-gray-100 h-screen">
-
-    <!-- Loading Screen -->
-    <!-- <div id="loadingScreen" class="flex items-center justify-center h-screen bg-gray-100 animate-fadeIn">
-        <h2 class="text-3xl font-bold animate-pulse">Loading...</h2>
-    </div> -->
 
     <!-- Sidebar -->
     <div class="flex">
@@ -197,13 +176,47 @@
                 <h1 class="text-3xl font-bold text-center mb-6 animate-bounce">Inventory</h1>
 
                 <!-- Search Bar -->
-                <div class="flex gap-10">
+                <div class=" gap-10">
                     <div class="flex justify-center mb-6">
-                        <input type="text" id="searchBar" placeholder="Search inventory..."
-                            class="search-bar w-full max-w-lg px-4 py-2 rounded-lg border-2 focus:border-blue-500 transition-all duration-300 shadow-lg transform hover:scale-105">
+                        <input type="text" id="searchInput" placeholder="Search inventory..."
+                            class="search-bar w-full max-w-lg text-black px-4 py-2 rounded-l-lg border-2 focus:border-blue-500 transition-all duration-300 shadow-lg transform hover:scale-105">
+                        <button id="searchButton"
+                            class="px-4 py-2 rounded-r-lg border-2 text-black bg-white hover:scale-105 search-bar transition-all duration-300 shadow-lg transform">Search</button>
+                        <button id="bntsell"
+                            class="pointer bg-red-500 rounded-md text-white h-10 px-8 mt-1 ml-10 transition-transform duration-200 hover:scale-110">Sell</button>
+
+                      
                     </div>
-                    <button id="bntsell"
-                        class="pointer bg-red-500 rounded-md text-white h-10 px-8 mt-1 mr-8 transition-transform duration-200 hover:scale-110">Sell</button>
+
+                    <div class="hidden" id="main">
+                        <table id="foodTable"
+                            class="min-w-full bg-white rounded-lg shadow-md inventory-table transition-opacity duration-500 hover:opacity-90">
+                            <thead class="bg-gray-800 text-white">
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
+                                        Product Name</th>
+                                    <th
+                                        class="px-6 py-3 text-left  text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
+                                        Category</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
+                                        Price</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
+                                        ID</th>
+                                    <th
+                                        class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider transition-colors duration-300 hover:bg-gray-700">
+                                        QUANTITY</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700 text-sm font-medium">
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                  
                 </div>
                 <div id="popupContainer" class="popup hidden bg-slate-500 pt-10">
                     <div
