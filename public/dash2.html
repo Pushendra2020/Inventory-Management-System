@@ -56,10 +56,8 @@
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-semibold text-white">Dashboard</h2>
                 <div class="flex items-center space-x-4">
-                    <span class="text-gray-300">abcd bcd</span>
+                    <span class="text-gray-300" id="userin">1</span>
                     <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 hover:scale-105 transition-transform">Profile</a>
-                    <!-- <a href="#" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 hover:scale-105 transition-transform">Sign Up</a>
-                    <a href="#" class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 hover:scale-105 transition-transform">Login</a> -->
                 </div>
             </div>
 
@@ -67,22 +65,22 @@
             <div class="grid grid-cols-4 gap-6 mb-6">
                 <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:scale-105">
                     <h3 class="text-gray-400 text-xs uppercase">Sales</h3>
-                    <p class="text-2xl font-semibold">$0</p>
+                    <p class="text-2xl font-semibold" id="totalPrice"></p>
                     <span class="text-green-500 text-sm">+67.81%</span>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:scale-105">
                     <h3 class="text-gray-400 text-xs uppercase">Purchase</h3>
-                    <p class="text-2xl font-semibold">$0</p>
+                    <p class="text-2xl font-semibold" >0 Rs</p>
                     <span class="text-red-500 text-sm">-67.81%</span>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:scale-105">
-                    <h3 class="text-gray-400 text-xs uppercase">Total Products</h3>
-                    <p class="text-2xl font-semibold">0</p>
+                    <h3 class="text-gray-400 text-xs uppercase">Inventory Products</h3>
+                    <p class="text-2xl font-semibold" id="Qunti">0</p>
                 </div>
                 <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:scale-105">
-                    <h3 class="text-gray-400 text-xs uppercase">Total Stores</h3>
-                    <p class="text-2xl font-semibold">0</p>
-                    <span class="text-red-500 text-sm">-67.81%</span>
+                    <h3 class="text-gray-400 text-xs uppercase">Sold Products</h3>
+                    <p class="text-2xl font-semibold" id="totalQunti"></p>
+                    
                 </div>
             </div>
 
@@ -132,18 +130,17 @@
                 <div class="bg-gray-800 p-8 rounded-lg shadow-lg max-w-lg w-full">
                     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:scale-105 transition-transform" id="profileBtn">Profile</button>
                     <div class="flex flex-col items-center mb-6">
-                        <img src= 'assets\385[1].webp' alt="Profile Picture" class="rounded-full mb-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold">abcd bcd</h3>
-                        <p class="text-gray-600">abcd@example.com</p>
+                        <h3 class="text-xl font-semibold" id = "userin1"></h3>
+                        <p class="text-gray-600" id="usere"></p>
                     </div>
                     <div class="space-y-4">
                         <div class="flex justify-between">
                             <span class="text-gray-600">Username:</span>
-                            <span class="font-semibold">abcd bcd</span>
+                            <span class="font-semibold" id="userin2"></span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Email:</span>
-                            <span class="font-semibold">abcd@example.com</span>
+                            <span class="font-semibold" id="usere1"></span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Joined:</span>
@@ -157,57 +154,6 @@
             </div>
         </main>
     </div>
-
-    <!-- Signup Modal -->
-    <!-- <div id="signupModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-500">
-        <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-            <h2 class="text-xl font-bold mb-4">Sign Up</h2>
-            <form id="signupForm">
-                <div class="mb-4">
-                    <label for="signupUsername" class="block text-gray-700">Username</label>
-                    <input type="text" id="signupUsername" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
-                </div>
-                <div class="mb-4">
-                    <label for="signupEmail" class="block text-gray-700">Email</label>
-                    <input type="email" id="signupEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
-                </div>
-                <div class="mb-4">
-                    <label for="signupPassword" class="block text-gray-700">Password</label>
-                    <input type="password" id="signupPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 hover:scale-105 transition-transform">Sign Up</button>
-            </form>
-        </div>
-    </div> -->
-
-    <!-- Login Modal -->
-    <!-- <div id="loginModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-500">
-        <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-            <h2 class="text-xl font-bold mb-4">Login</h2>
-            <form id="loginForm">
-                <div class="mb-4">
-                    <label for="loginEmail" class="block text-gray-700">Email</label>
-                    <input type="email" id="loginEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
-                </div>
-                <div class="mb-4">
-                    <label for="loginPassword" class="block text-gray-700">Password</label>
-                    <input type="password" id="loginPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
-                </div>
-                <button type="submit" class="w-full bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 hover:scale-105 transition-transform">Login</button>
-            </form>
-        </div>
-    </div> -->
-
-  <script>
-      function showToast(message, type) {
-            toastr[type](message);
-        }
-
-        // Example usage: Show a success toast when the page loads
-        document.addEventListener('DOMContentLoaded', (event) => {
-            showToast('Logged in successfully!', 'success');
-        });
-  </script>
   <script src="dash2.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </body>
