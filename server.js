@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const app = express();
-const port = 5500;
+const port = 5501;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -27,29 +27,66 @@ db.connect((err) => {
     console.log('Connected to the MySQL database.');
 });
 
-// Route for handling account creation (Register)
+
+
 app.post('/register', async (req, res) => {
-    const { name, email, password } = req.body;
+    const { username, email, password } = req.body;
 
     try {
-        // Hash password
+      
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Insert user into the database
+      
         const sql = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
-        db.query(sql, [name, email, hashedPassword], (err, result) => {
+        db.query(sql, [username, email, hashedPassword], (err, result) => {
             if (err) throw err;
-            res.send('User registered successfully');
+
+          
+            const userId = result.insertId; 
+            const storeTableName = `${username}_storeproduct`;
+            const sellTableName = `${username}_sellproduct`;
+
+            const createStoreTableQuery = `
+                CREATE TABLE IF NOT EXISTS ${storeTableName} (
+                    id bigint,
+                    pname VARCHAR(255),
+                    ptype VARCHAR(255),
+                    price DECIMAL(10, 2),
+                    qunti INT
+                )
+            `;
+            const createSellTableQuery = `
+                CREATE TABLE IF NOT EXISTS ${sellTableName} (
+                    id bigint ,
+                    pname VARCHAR(255),
+                    ptype VARCHAR(255),
+                    price DECIMAL(10, 2),
+                    qunti INT
+                )
+            `;
+
+            db.query(createStoreTableQuery, (err) => {
+                if (err) {
+                    return res.status(500).json({ message: 'Error creating store product table' });
+                }
+
+                db.query(createSellTableQuery, (err) => {
+                    if (err) {
+                        return res.status(500).json({ message: 'Error creating sell product table' });
+                    }
+
+                    res.send('User registered and tables created successfully!');
+                });
+            });
         });
     } catch (error) {
         res.status(500).send('Server error');
     }
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    // Find the user in the database by email
     const sql = 'SELECT * FROM users WHERE email = ?';
     db.query(sql, [email], async (err, results) => {
         if (err) {
@@ -61,21 +98,15 @@ app.post('/login', (req, res) => {
         }
 
         const user = results[0];
-
-        // Compare the password with the hashed password in the database
         const isMatch = await bcrypt.compare(password, user.password);
         
         if (!isMatch) {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
-
-        // If password matches, send a success response and return to stop further execution
-        return res.json({ success: true, redirectUrl: '/dash2.html' });
+        return res.json({ success: true, username: user.name, redirectUrl: '/inventory.html' });
     });
 });
 
-
-// Route for scanning products
 app.post('/scan', (req, res) => {
     const code = req.body.code;
     const query = 'SELECT id, pname, ptype, price, qunti FROM product WHERE id = ?';
@@ -101,7 +132,7 @@ app.post('/scan', (req, res) => {
     });
 });
 
-// Fetch product by code (GET request)
+
 app.get('/product', (req, res) => {
     const code = req.query.code;
     const sql = 'SELECT id, pname, ptype, price, qunti FROM product WHERE id = ?';
@@ -118,10 +149,10 @@ app.get('/product', (req, res) => {
     });
 });
 
-// Fetch store product by id (GET request)
-app.get('/storeproduct/:id', (req, res) => {
-    const code = req.params.id;
-    const sql = 'SELECT id, pname, ptype, price, qunti FROM storeproduct WHERE id = ?';
+
+app.get('/users', (req, res) => {
+    const code = req.query.username;
+    const sql = 'SELECT name,id FROM users = ?,?';
     db.query(sql, [code], (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
@@ -135,9 +166,10 @@ app.get('/storeproduct/:id', (req, res) => {
     });
 });
 
-// Fetch all store products (GET request)
+
 app.get('/storeproduct', (req, res) => {
-    const sql = 'SELECT * FROM storeproduct';
+    const username = req.query.username;
+    const sql = `SELECT * FROM  ${username}_storeproduct`;
     db.query(sql, (err, results) => {
         if (err) {
             console.error('Error fetching data:', err);
@@ -148,9 +180,9 @@ app.get('/storeproduct', (req, res) => {
     });
 });
 
-// Fetch all sold products (GET request)
 app.get('/sellproduct', (req, res) => {
-    const sql = 'SELECT * FROM sellproduct';
+    const username =  req.query.username;
+    const sql = `SELECT * FROM  ${username}_sellproduct`;
     db.query(sql, (err, results) => {
         if (err) {
             console.error('Error fetching data:', err);
@@ -161,11 +193,11 @@ app.get('/sellproduct', (req, res) => {
     });
 });
 
-// Add or update store product (POST request)
 app.post('/storeproduct', (req, res) => {
-    const { id, pname, ptype, price, qunti } = req.body;
+    const { username, id, pname, ptype, price, qunti } = req.body;  
+    const tableName = `${username}_storeproduct`;  
 
-    const selectQuery = 'SELECT qunti FROM storeproduct WHERE id = ?';
+    const selectQuery = `SELECT qunti FROM ${tableName} WHERE id = ?`;
     db.query(selectQuery, [id], (err, results) => {
         if (err) {
             console.error('Error selecting data:', err);
@@ -176,7 +208,7 @@ app.post('/storeproduct', (req, res) => {
             const currentQuantity = results[0].qunti;
             const updatedQuantity = currentQuantity + 1;
 
-            const updateQuery = 'UPDATE storeproduct SET qunti = ? WHERE id = ?';
+            const updateQuery = `UPDATE ${tableName} SET qunti = ? WHERE id = ?`;
             db.query(updateQuery, [updatedQuantity, id], (err) => {
                 if (err) {
                     console.error('Error updating quantity:', err);
@@ -186,7 +218,7 @@ app.post('/storeproduct', (req, res) => {
                 return res.json({ success: true, message: 'Product quantity updated successfully!' });
             });
         } else {
-            const insertQuery = 'INSERT INTO storeproduct (id, pname, ptype, price, qunti) VALUES (?, ?, ?, ?, ?)';
+            const insertQuery = `INSERT INTO ${tableName} (id, pname, ptype, price, qunti) VALUES (?, ?, ?, ?, ?)`;
             db.query(insertQuery, [id, pname, ptype, price, 1], (err) => {
                 if (err) {
                     console.error('Error inserting data:', err);
@@ -199,11 +231,12 @@ app.post('/storeproduct', (req, res) => {
     });
 });
 
-// Sell a product (POST request)
 app.post('/sellproduct', (req, res) => {
-    const { id } = req.body;
+    const { username, id } = req.body;  
+    const storeTableName = `${username}_storeproduct`;
+    const sellTableName = `${username}_sellproduct`;
 
-    const selectQuery = 'SELECT * FROM storeproduct WHERE id = ?';
+    const selectQuery = `SELECT * FROM ${storeTableName} WHERE id = ?`;
     db.query(selectQuery, [id], (err, results) => {
         if (err) {
             console.error('Error selecting data:', err);
@@ -218,14 +251,14 @@ app.post('/sellproduct', (req, res) => {
         const updatedQuantity = product.qunti - 1;
 
         if (updatedQuantity > 0) {
-            const updateQuery = 'UPDATE storeproduct SET qunti = ? WHERE id = ?';
+            const updateQuery = `UPDATE ${storeTableName} SET qunti = ? WHERE id = ?`;
             db.query(updateQuery, [updatedQuantity, id], (err) => {
                 if (err) {
                     console.error('Error updating quantity:', err);
                     return res.status(500).json({ success: false, message: 'Failed to update product quantity' });
                 }
 
-                moveToSellProduct(product, db, (err) => {
+                moveToSellProduct(product, sellTableName, (err) => {
                     if (err) {
                         return res.status(500).json({ success: false, message: 'Failed to move product to sellproduct' });
                     }
@@ -234,58 +267,39 @@ app.post('/sellproduct', (req, res) => {
                 });
             });
         } else {
-            const deleteQuery = 'DELETE FROM storeproduct WHERE id = ?';
-            db.beginTransaction((err) => {
+            const deleteQuery = `DELETE FROM ${storeTableName} WHERE id = ?`;
+            db.query(deleteQuery, [id], (err) => {
                 if (err) {
-                    console.error('Error starting transaction:', err);
-                    return res.status(500).json({ success: false, message: 'Transaction error' });
+                    console.error('Error deleting product:', err);
+                    return res.status(500).json({ success: false, message: 'Failed to delete product' });
                 }
 
-                db.query(deleteQuery, [id], (err) => {
+                moveToSellProduct(product, sellTableName, (err) => {
                     if (err) {
-                        return db.rollback(() => {
-                            console.error('Error deleting product:', err);
-                            res.status(500).json({ success: false, message: 'Failed to delete product' });
-                        });
+                        return res.status(500).json({ success: false, message: 'Failed to move product to sellproduct' });
                     }
 
-                    moveToSellProduct(product, db, (err) => {
-                        if (err) {
-                            return res.status(500).json({ success: false, message: 'Failed to move product to sellproduct' });
-                        }
-
-                        db.commit((err) => {
-                            if (err) {
-                                return db.rollback(() => {
-                                    console.error('Error committing transaction:', err);
-                                    res.status(500).json({ success: false, message: 'Transaction commit failed' });
-                                });
-                            }
-
-                            return res.json({ success: true, message: 'Product sold successfully!' });
-                        });
-                    });
+                    return res.json({ success: true, message: 'Product sold successfully!' });
                 });
             });
         }
     });
 });
 
-// Function to move product to sellproduct table
-function moveToSellProduct(product, connection, callback) {
-    const checkSellProductQuery = "SELECT * FROM sellproduct WHERE id = ?";
-    connection.query(checkSellProductQuery, [product.id], (err, result) => {
+function moveToSellProduct(product, tableName, callback) {
+    const checkSellProductQuery = `SELECT * FROM ${tableName} WHERE id = ?`;
+    db.query(checkSellProductQuery, [product.id], (err, result) => {
         if (err) return callback(err);
 
         if (result.length > 0) {
-            const updateSellProductQuery = "UPDATE sellproduct SET qunti = qunti + 1 WHERE id = ?";
-            connection.query(updateSellProductQuery, [product.id], (err) => {
+            const updateSellProductQuery = `UPDATE ${tableName} SET qunti = qunti + 1 WHERE id = ?`;
+            db.query(updateSellProductQuery, [product.id], (err) => {
                 if (err) return callback(err);
                 return callback(null);
             });
         } else {
-            const insertSellProductQuery = "INSERT INTO sellproduct (id, pname, ptype, price, qunti) VALUES (?, ?, ?, ?, ?)";
-            connection.query(insertSellProductQuery, [product.id, product.pname, product.ptype, product.price, 1], (err) => {
+            const insertSellProductQuery = `INSERT INTO ${tableName} (id, pname, ptype, price, qunti) VALUES (?, ?, ?, ?, ?)`;
+            db.query(insertSellProductQuery, [product.id, product.pname, product.ptype, product.price, 1], (err) => {
                 if (err) return callback(err);
                 return callback(null);
             });
@@ -293,10 +307,18 @@ function moveToSellProduct(product, connection, callback) {
     });
 }
 
+app.get('/user', (req, res) => {
+    const { name } = req.query;
+    let sql = 'SELECT * FROM storeproduct WHERE pname LIKE ?';
+    db.query(sql, [`%${name}%`], (err, results) => {
+      if (err) {
+        throw err;
+      }
+      res.json(results);
+    });
+  });
+
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
-
-
-
-
