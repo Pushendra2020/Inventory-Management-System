@@ -59,7 +59,7 @@ scanButton.addEventListener('click', function () {
                             .then(response => response.json())
                             .then(product => {
 
-                                if (product && product.pname && product.ptype && product.price) { // Check if product is valid
+                                if (product && product.pname && product.ptype && product.price) { 
 
 
                                     console.log(result.text);
@@ -71,6 +71,8 @@ scanButton.addEventListener('click', function () {
                                     let price = product.price;
                                     let id = product.id;
                                     let qunti = product.qunti;
+                                    let ex_date = product.ex_date;
+                                    let daysLeft = product.daysLeft;
                                     qunti = qunti + 1;
 
                                     row.innerHTML = `
@@ -79,6 +81,8 @@ scanButton.addEventListener('click', function () {
                                         <td class="py-3 px-6">${product.price}</td>
                                         <td class="py-3 px-6">${product.id}</td>
                                         <td class="py-3 px-6">${qunti}</td>
+                                        <td class="py-3 px-6">${product.ex_date}</td>
+                                        <td class="py-3 px-6">${daysLeft}</td>
                                     `;
                                     table.appendChild(row);
 
@@ -93,7 +97,9 @@ scanButton.addEventListener('click', function () {
                                             pname: pname,
                                             ptype: ptype,
                                             price: price,
-                                            qunti: qunti
+                                            qunti: qunti,
+                                            ex_date: ex_date,
+                                            daysLeft:daysLeft
                                         })
                                     })
                                         .then(response => response.json())
@@ -203,14 +209,17 @@ scanButton.addEventListener('click', function () {
                                 let price = product.price;
                                 let id = product.id;
                                 let qunti = product.qunti;
+                                let ex_date =product.ex_date;
+                                let lef =product.lef;
                                 qunti = qunti + 1;
-
                                 row.innerHTML = `
                                     <td class="py-3 px-6">${pname}</td>
                                     <td class="py-3 px-6">${ptype}</td>
                                     <td class="py-3 px-6">${price}</td>
                                     <td class="py-3 px-6">${id}</td>
                                     <td class="py-3 px-6">${qunti}</td>
+                                    <td class="py-3 px-6">${ex_date}</td>
+                                    <td class="py-3 px-6">${lef}</td>
                                 `;
                                 table.appendChild(row);
 
@@ -225,7 +234,9 @@ scanButton.addEventListener('click', function () {
                                         pname: pname,
                                         ptype: ptype,
                                         price: price,
-                                        qunti: qunti
+                                        qunti: qunti,
+                                        ex_date:ex_date,
+                                        lef: lef
                                     })
                                 })
                                 .then(response => response.json())
@@ -288,14 +299,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 const table = document.getElementById('inventoryTable').querySelector('tbody');
                 const row = document.createElement('tr');
                 row.classList.add('border-b');
+                let lef;
+               let ex_date;
+                if(product.lef == -1){
+                    lef="Expired";
+                    row.innerHTML =`
+                    <td class="py-3 px-6">${product.pname}</td>
+                    <td class="py-3 px-6">${product.ptype}</td>
+                    <td class="py-3 px-6">${product.price}</td>
+                    <td class="py-3 px-6">${product.id}</td>
+                    <td class="py-3 px-6">${product.qunti}</td>
+                    <td class="py-3 px-6">${product.ex_date}</td>
+                    <td class="py-3 px-6">${lef}</td>`
+                }else if(product.lef == -2){
+                    lef="No have expiry date";
+                    ex_date="No date";
+                    row.innerHTML =`
+                    <td class="py-3 px-6">${product.pname}</td>
+                    <td class="py-3 px-6">${product.ptype}</td>
+                    <td class="py-3 px-6">${product.price}</td>
+                    <td class="py-3 px-6">${product.id}</td>
+                    <td class="py-3 px-6">${product.qunti}</td>
+                    <td class="py-3 px-6">${ex_date}</td>
+                    <td class="py-3 px-6">${lef}</td>`
+                }
+                else{
                 row.innerHTML = `
                     <td class="py-3 px-6">${product.pname}</td>
                     <td class="py-3 px-6">${product.ptype}</td>
                     <td class="py-3 px-6">${product.price}</td>
                     <td class="py-3 px-6">${product.id}</td>
                     <td class="py-3 px-6">${product.qunti}</td>
+                    <td class="py-3 px-6">${product.ex_date}</td>
+                    <td class="py-3 px-6">${product.lef}</td>
                 `;
-
+                }
                 table.appendChild(row);
             });
         })
@@ -396,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
         main.classList.remove('hidden');
         const query = searchInput.value.trim();
         if (query) {
-            fetch(`/user?name=${query}`, {
+            fetch(`/user?name=${query}&username=${username}`, {
                 method: 'GET'
             })
                 .then(response => response.json())
