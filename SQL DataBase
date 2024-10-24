@@ -1,28 +1,46 @@
 -- show databases;
 -- CREATE SCHEMA `new_schema` ;
+-- DECLARE @DATE Nvarchar(50);
+set @DATE = '2024-10-5';
+select @DATE;
+select DATEDIFF(year,@DATE,getdate());
+SELECT TIMESTAMPDIFF(day, @DATE, NOW());
+
 create table product (
 id bigint primary key,
 pname varchar(20),
 ptype varchar(20),
 price float,
-qunti integer
+qunti integer,
+ex_date DATE,
+lef integer
 );
-drop table product;
-insert into product (id,pname,ptype,price,qunti) values (89003978,"Iodex","Baam",30,0);
-insert into product (id,pname,ptype,price,qunti) values (8902242717963,"NoteBook","Book",76,0);
-insert into product (id,pname,ptype,price,qunti) values (8902242718243,"Long NoteBook","Book",76,0);
+UPDATE product SET ex_date = NULL WHERE id = 8901725015718;
 
-insert into product (id,pname,ptype,price,qunti) values (7622201762476,"Dairy Milk","Chocolate",100,0);
-insert into product (id,pname,ptype,price,qunti) values (8901057510028,"Kangaroo","Stapler pin",40,0);
-insert into product (id,pname,ptype,price,qunti) values (6971123984109,"Desert Erasers","Eraser",60,0);
-insert into product (id,pname,ptype,price,qunti) values (8901719129452,"JimJam","Biscuit",35,0);
+drop table product;
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (89003978,"Iodex","Baam",30,0,'2024-12-6',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (8902242717963,"NoteBook","Book",76,0,'2024-12-26',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (8902242718243,"Long NoteBook","Book",76,0,'2024-10-9',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (7622201762476,"Dairy Milk","Chocolate",100,0,'2024-11-6',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (8901057510028,"Kangaroo","Stapler pin",40,0,'2024-9-30',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (6971123984109,"Desert Erasers","Eraser",60,0,'2024-12-16',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (8901719129452,"JimJam","Biscuit",35,0,'2024-10-26',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (8904058700375,"Cockroach Chock","Insect killer",18,0,'2025-11-5',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (6950376750761,"Reddragon Dyaus","Keyboard",999,0,'2000-2-2',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (8906117360360,"Cow Milk","Milk",29,0,'2024-10-29',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (9789353332945,"Cant't Hurt Me","Book",699,0,'2024-11-1',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (8906001023043,"Amul Ghee","Ghee",129,0,'2024-10-5',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (8904083300021,"Amul Paneer","Paneer",125,0,'2024-10-30',0);
+insert into product (id,pname,ptype,price,qunti,ex_date,lef) values (8901725015718,"MangalDeep","Dhoop",189,0,'2200-5-9',0);
 
  create table storeproduct (
  id bigint,
  pname varchar(20),
  ptype varchar(20),
 price float,
-qunti integer
+qunti integer,
+ex_date date,
+lef int
  );
  drop table storeproduct;
 
@@ -31,7 +49,9 @@ id bigint,
 pname varchar(20),
 ptype varchar(20),
  price float,
- qunti integer
+ qunti integer,
+ ex_date date,
+lef int
 );
  drop table sellproduct;
  
