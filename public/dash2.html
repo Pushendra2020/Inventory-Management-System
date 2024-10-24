@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
-        /* Notification message */
+        /* notification */
         .notification {
             position: fixed;
             top: -60px;
@@ -29,7 +29,7 @@
 
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-600 text-gray-100 h-screen">
 
-    <!-- Sidebar (Static) -->
+    <!-- sidebar (static) -->
     <div class="flex">
         <aside class="w-64 bg-gray-900 h-screen animate-slideInLeft shadow-lg">
             <div class="p-4">
@@ -51,12 +51,12 @@
             </nav>
         </aside>
 
-        <!-- Notification message -->
+        <!-- notification -->
         <div id="notification" class="notification">
             Welcome to the Inventory Management System!
         </div>
 
-        <!-- Main Content -->
+        <!-- main -->
         <main class="flex-1 p-6 relative h-full">
             <div class="flex justify-between items-center mb-6 ">
                 <h2 class="text-3xl font-semibold text-white">Dashboard</h2>
@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <!-- Dashboard Cards -->
+            <!-- dashboard cards -->
             <div class="grid grid-cols-4 gap-6 mb-6">
                 <div
                     class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:scale-105">
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <!-- Recent Inventory Movements Table -->
+            <!-- recent inventory movements  -->
             <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <h3 class="text-xl font-semibold mb-4 text-white">Recent Inventory Movements</h3>
                 <table class="min-w-full bg-gray-900 text-gray-300 rounded-lg" id="inventoryTable">
@@ -143,7 +143,7 @@
             </div>
 
 
-            <!-- Profile Page -->
+            <!-- profile page -->
             <div id="profilePage"
                 class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center opacity-0 transition-opacity duration-500">
                 <div class="bg-gray-800 p-8 rounded-lg shadow-lg max-w-lg w-full">
