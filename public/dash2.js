@@ -1,4 +1,4 @@
-/*notification*/
+// notification
 window.onload = function () {
     const notification = document.getElementById('notification');
     notification.classList.add('show');
@@ -7,7 +7,7 @@ window.onload = function () {
     }, 1500);
 }
 
-/* event listeners */
+//  event listeners 
 const profileBtn = document.getElementById('profileBtn');
 const profilePage = document.getElementById('profilePage');
 const closeProfile = document.getElementById('closeProfile');
@@ -32,7 +32,7 @@ closeProfileButton.addEventListener('click', () => {
     profilePage.classList.add('opacity-0');
 });
 
-/*  product qauntity logic */ 
+//  product qauntity logic 
 let username = localStorage.getItem('username');
 let email = localStorage.getItem('email');
 let totalPrice = localStorage.getItem('totalPrice');
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-/* chart */
+// chart 
 document.addEventListener('DOMContentLoaded', function () {
     fetch(`/productQuantities?username=${username}`)
         .then(response => response.json())
